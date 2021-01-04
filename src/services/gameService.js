@@ -8,7 +8,7 @@ export const gameService = {
 }
 
 function getGame(gameId): Promise {
-    let url = urls.GAME + "/" + gameId;
+    let url = urls.GAMES + "/" + gameId;
 
     const requestOptions = {
         method: 'GET',
@@ -23,7 +23,7 @@ function getGame(gameId): Promise {
 }
 
 function getGames(): Promise {
-    let url = urls.GAME;
+    let url = urls.GAMES;
 
     const requestOptions = {
         method: 'GET',
@@ -38,7 +38,7 @@ function getGames(): Promise {
 }
 
 function startGame(joinAs, body): Promise {
-    let url = urls.GAME + (joinAs ? '?join=' + joinAs.toUpperCase() : '');
+    let url = urls.GAMES + (joinAs ? '?join=' + joinAs.toUpperCase() : '');
 
     const requestOptions = {
         method: 'POST',
