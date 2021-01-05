@@ -40,7 +40,7 @@ class Game extends Component<Props> {
 
     state = {
         gameId: "",
-        fen: "start",
+        fen: "",
         // square styles for active drop square
         dropSquareStyle: {},
         // custom square styles
