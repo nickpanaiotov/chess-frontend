@@ -1,12 +1,10 @@
-const host = {
-    url: "http://chess-backend:8080/api"
-};
+const baseUrl = "/api";
 
 const urls = {
-    LOGIN: host.url + "/authentication/token",
-    SIGN_UP: host.url + "/signup",
-    GAMES: host.url + "/games",
-    MOVE: host.url + "/games/${gameId}"
+    LOGIN: baseUrl + "/authentication/token",
+    SIGN_UP: baseUrl + "/signup",
+    GAMES: baseUrl + "/games",
+    MOVE: baseUrl + "/games/${gameId}"
     // MOVE: host.url + "/api/games/5fec594d99e1ad0506787389/move/${move}"
 };
 
