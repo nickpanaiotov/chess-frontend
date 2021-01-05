@@ -35,7 +35,7 @@ class Game extends Component<Props> {
 
     static defaultProps = {
         orientation: 'white',
-        engineLevel: 10
+        engineLevel: 9
     }
 
     state = {
