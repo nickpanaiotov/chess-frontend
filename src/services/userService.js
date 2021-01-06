@@ -16,6 +16,12 @@ function login(username, password): Promise<String> {
     };
 
     return fetch(url, requestOptions)
-        .then(response => response.json())
+        .then(response => {
+            if (response.status !== 200) {
+                throw new Error("Bad Credentials");
+            }
+
+            return response.json()
+        })
         .then(body => body['id_token']);
 }

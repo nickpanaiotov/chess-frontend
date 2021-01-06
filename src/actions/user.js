@@ -48,7 +48,7 @@ export function loginUser(email, password) {
                 dispatch(receiveLogin());
             })
             .catch(error => {
-                dispatch(loginError('Something went wrong. Try again'));
+                dispatch(loginError(error.message ? error.message : 'Something went wrong. Try again'));
             })
     }
 }
