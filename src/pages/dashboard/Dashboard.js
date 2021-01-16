@@ -129,7 +129,7 @@ class Dashboard extends React.Component {
                         <div className="range">
                             <input type="range" min={1} max={20} defaultValue={10} className="form-control" id="difficulty"
                                    onChange={(event) =>
-                                       this.setState({engine: {...this.state.engine, difficulty: event.target.value}})}/>
+                                       this.setState({engine: {...this.state.engine, difficulty: Number.parseInt(event.target.value)}})}/>
                         </div>
                     </div>
 
@@ -138,7 +138,7 @@ class Dashboard extends React.Component {
                         <div className="range">
                             <input type="range" min={1} max={20} defaultValue={10} className="form-control" id="depth"
                                    onChange={(event) =>
-                                       this.setState({engine: {...this.state.engine, depth: event.target.value}})}/>
+                                       this.setState({engine: {...this.state.engine, depth: Number.parseInt(event.target.value)}})}/>
                         </div>
                     </div>
 
@@ -147,7 +147,7 @@ class Dashboard extends React.Component {
                         <div className="range">
                             <input type="range" min={100} max={4000} defaultValue={2000} className="form-control" id="timeForThinking"
                                    onChange={(event) =>
-                                       this.setState({engine: {...this.state.engine, time: event.target.value}})}/>
+                                       this.setState({engine: {...this.state.engine, time: Number.parseInt(event.target.value)}})}/>
                         </div>
                     </div>
 
