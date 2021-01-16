@@ -28,9 +28,7 @@ class OAuth extends React.Component {
         }
 
         return (
-            <div className="oauth-page">
-                <p>Kur</p>
-            </div>
+            <div className="oauth-page"/>
         )
     }
 }
