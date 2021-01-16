@@ -27,6 +27,7 @@ class Login extends React.Component {
         this.changeEmail = this.changeEmail.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.signUp = this.signUp.bind(this);
+        this.github = this.github.bind(this);
     }
 
     changeEmail(event) {
@@ -35,6 +36,11 @@ class Login extends React.Component {
 
     changePassword(event) {
         this.setState({password: event.target.value});
+    }
+
+    github(e) {
+        e.preventDefault();
+        window.location.href='/api/oauth2/authorization/github'
     }
 
     doLogin(e) {
@@ -59,7 +65,8 @@ class Login extends React.Component {
         return (
             <div className="auth-page">
                 <Container>
-                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0" style={{fontSize: 36}}>шах <span className="fw-bold">Ею</span></h3>}>
+                    <Widget className="widget-auth mx-auto"
+                            title={<h3 className="mt-0" style={{fontSize: 36}}>шах <span className="fw-bold">Ею</span></h3>}>
                         <p className="widget-auth-info">
                             Използвайте имейла си, за да влезете.
                         </p>
@@ -105,6 +112,15 @@ class Login extends React.Component {
                                   </span>
                                     {this.props.isFetching ? 'Loading...' : 'Login'}
                                 </Button>
+
+                                <Button type="submit" color="secondary" className="auth-btn"
+                                        size="sm" style={{color: '#000'}} onClick={this.github}>
+                                  <span className="auth-btn-circle" style={{marginRight: 8}}>
+                                    <i className="fa fa-github"/>
+                                  </span>
+                                    {this.props.isFetching ? 'Loading...' : 'GitHub'}
+                                </Button>
+
                                 <p className="widget-auth-info mt-4">
                                     Don't have an account? Sign up now!
                                 </p>

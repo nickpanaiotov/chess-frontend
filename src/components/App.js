@@ -13,6 +13,7 @@ import LayoutComponent from '../components/Layout';
 import Login from '../pages/login';
 import Register from '../pages/register';
 import { logoutUser } from '../actions/user';
+import OAuth from "../pages/oauth/OAuth";
 
 const PrivateRoute = ({dispatch, component, ...rest }) => {
     if (!Login.isAuthenticated(localStorage.getItem('id_token'))) {
@@ -43,6 +44,7 @@ class App extends React.PureComponent {
                     <PrivateRoute path="/app" dispatch={this.props.dispatch} component={LayoutComponent}/>
                     <Route path="/register" exact component={Register}/>
                     <Route path="/login" exact component={Login}/>
+                    <Route path="/oauth" exact component={OAuth}/>
                     <Route path="/error" exact component={ErrorPage}/>
                     <Route component={ErrorPage}/>
                     <Redirect from="*" to="/app/main/dashboard"/>

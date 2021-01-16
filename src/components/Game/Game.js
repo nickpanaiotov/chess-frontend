@@ -3,18 +3,18 @@ import React, {Component} from "react";
 import {gameService} from "../../services/gameService";
 import Chessboard from "chessboardjsx";
 import * as ChessJS from "chess.js";
-import wQueen from "../../images/figures/w-queen.svg";
-import bQueen from "../../images/figures/b-queen.svg";
-import wKing from "../../images/figures/w-king.svg";
-import bKing from "../../images/figures/b-king.svg";
-import wPawn from "../../images/figures/w-pawn.svg";
-import bPawn from "../../images/figures/b-pawn.svg";
-import wRook from "../../images/figures/w-rook.svg";
-import bRook from "../../images/figures/b-rook.svg";
-import wKnight from "../../images/figures/w-knight.svg";
-import bKnight from "../../images/figures/b-knight.svg";
-import wBishop from "../../images/figures/w-bishop.svg";
-import bBishop from "../../images/figures/b-bishop.svg";
+import wQueen from "./figures/w-queen.svg";
+import bQueen from "./figures/b-queen.svg";
+import wKing from "./figures/w-king.svg";
+import bKing from "./figures/b-king.svg";
+import wPawn from "./figures/w-pawn.svg";
+import bPawn from "./figures/b-pawn.svg";
+import wRook from "./figures/w-rook.svg";
+import bRook from "./figures/b-rook.svg";
+import wKnight from "./figures/w-knight.svg";
+import bKnight from "./figures/b-knight.svg";
+import wBishop from "./figures/w-bishop.svg";
+import bBishop from "./figures/b-bishop.svg";
 
 interface Props {
     orientation: string,
@@ -106,7 +106,7 @@ class Game extends Component<Props> {
         const {orientation, engineLevel, onStateChange} = this.props;
         let mode = orientation === 'white' ? 'HUMAN_VS_MACHINE' : 'MACHINE_VS_HUMAN';
         let body = {mode: mode};
-        body[orientation === 'white' ? 'blackPlayer' : 'whitePlayer'] = {type: 'ENGINE', elo: engineLevel};
+        body[orientation === 'white' ? 'blackPlayer' : 'whitePlayer'] = {type: 'ENGINE', attributes: engineLevel};
 
         gameService.startGame(orientation, body)
             .then(game => {
@@ -342,6 +342,7 @@ class Game extends Component<Props> {
             justifyContent: 'center'
         }
     }
+
     getImgStyle = (squareWidth) => {
         return {
             alignSelf: 'center',

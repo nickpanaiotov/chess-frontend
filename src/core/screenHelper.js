@@ -1,7 +1,4 @@
 const config = {
-  name: 'light-blue-template',
-  title: 'Light Blue Template App built with React JS by Flatlogic',
-  version: '3.8.0',
   settings: {
     screens: {
       'xs-max': 543,

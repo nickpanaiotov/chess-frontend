@@ -2,6 +2,7 @@ const baseUrl = "/api";
 
 const urls = {
     LOGIN: baseUrl + "/authentication/token",
+    USER_INFO: baseUrl + "/authentication/info",
     SIGN_UP: baseUrl + "/signup",
     GAMES: baseUrl + "/games",
     MOVE: baseUrl + "/games/${gameId}"

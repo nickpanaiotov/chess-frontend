@@ -1,15 +1,5 @@
 import React from "react";
-import {Row, Col, Progress, Table, Label, Input} from "reactstrap";
-
-// import AnimateNumber from "react-animated-number";
-
-import s from "./Dashboard.module.scss";
-
-import peopleA1 from "../../images/people/a1.jpg";
-import peopleA2 from "../../images/people/a2.jpg";
-import peopleA5 from "../../images/people/a5.jpg";
-import peopleA4 from "../../images/people/a4.jpg";
-import Chessboard from "chessboardjsx";
+import {Row, Col} from "reactstrap";
 import Game from "../../components/Game/Game";
 import Widget from "../../components/Widget";
 
@@ -19,7 +9,12 @@ class Dashboard extends React.Component {
         this.state = {
             orientation: 'white',
             // history: JSON.parse("[{\"whiteMove\":\"f3\",\"blackMove\":\"e5\"},{\"whiteMove\":\"e4\",\"blackMove\":\"Nc6\"},{\"whiteMove\":\"d3\",\"blackMove\":\"h6\"},{\"whiteMove\":\"c4\",\"blackMove\":\"Bb4+\"},{\"whiteMove\":\"Bd2\",\"blackMove\":\"a5\"},{\"whiteMove\":\"Bxb4\",\"blackMove\":\"axb4\"},{\"whiteMove\":\"a3\",\"blackMove\":\"Nd4\"},{\"whiteMove\":\"axb4\",\"blackMove\":\"Rxa1\"},{\"whiteMove\":\"Ne2\",\"blackMove\":\"Qh4+\"},{\"whiteMove\":\"g3\",\"blackMove\":\"Nxf3+\"},{\"whiteMove\":\"Kf2\",\"blackMove\":\"Qf6\"},{\"whiteMove\":\"Nf4\",\"blackMove\":\"Nd4\"},{\"whiteMove\":\"Bh3\",\"blackMove\":\"Ne7\"},{\"whiteMove\":\"Qa4\",\"blackMove\":\"Rxa4\"},{\"whiteMove\":\"Nc3\",\"blackMove\":\"exf4\"},{\"whiteMove\":\"Nxa4\",\"blackMove\":\"fxg3+\"},{\"whiteMove\":\"Kxg3\",\"blackMove\":\"Qf3+\"},{\"whiteMove\":\"Kh4\",\"blackMove\":\"g5#\"}]")
-            history: null
+            history: null,
+            engine: {
+                difficulty: 10,
+                depth: 10,
+                time: 2000
+            }
         };
     }
 
@@ -33,7 +28,7 @@ class Dashboard extends React.Component {
                             <Game orientation={this.state.orientation}
                                   start={start => this.start = start}
                                   leave={leave => this.leave = leave}
-                                  engineLevel={this.state.engineElo}
+                                  engineLevel={this.state.engine}
                                   onStateChange={this.onGameStateChange}
                             />
                         }
@@ -129,34 +124,35 @@ class Dashboard extends React.Component {
                     </div>
                 </div>
                 <div className="form-row">
-                    <div className="form-group col-md-4 align-middle">
-                        <label htmlFor="inputState">Трудност</label>
-                        <select id="inputState" className="form-control"
-                                defaultValue={10}
-                                onChange={(event) => this.setState({engineElo: event.target.value})}>
-                            <option value="1">250</option>
-                            <option value="2">400</option>
-                            <option value="4">700</option>
-                            <option value="5">850</option>
-                            <option value="6">1000</option>
-                            <option value="7">1100</option>
-                            <option value="8">1200</option>
-                            <option value="9">1300</option>
-                            <option value="10">1400</option>
-                            <option value="11">1500</option>
-                            <option value="12">1600</option>
-                            <option value="13">1700</option>
-                            <option value="14">1800</option>
-                            <option value="15">1900</option>
-                            <option value="16">2000</option>
-                            <option value="17">2100</option>
-                            <option value="18">2200</option>
-                            <option value="19">2300</option>
-                            <option value="20">2400</option>
-                        </select>
+                    <div className="form-group col-md-12 align-middle">
+                        <label htmlFor="difficulty">Трудност: {this.state.engine.difficulty}</label>
+                        <div className="range">
+                            <input type="range" min={1} max={20} defaultValue={10} className="form-control" id="difficulty"
+                                   onChange={(event) =>
+                                       this.setState({engine: {...this.state.engine, difficulty: event.target.value}})}/>
+                        </div>
                     </div>
-                    <div className="form-group col-md-8 align-self-end">
-                        <button type="button" className="btn btn-primary btn-block" onClick={() => this.start()}>Започни игра</button>
+
+                    <div className="form-group col-md-12 align-middle">
+                        <label htmlFor="depth">Дълбочина: {this.state.engine.depth}</label>
+                        <div className="range">
+                            <input type="range" min={1} max={20} defaultValue={10} className="form-control" id="depth"
+                                   onChange={(event) =>
+                                       this.setState({engine: {...this.state.engine, depth: event.target.value}})}/>
+                        </div>
+                    </div>
+
+                    <div className="form-group col-md-12 align-middle">
+                        <label htmlFor="timeForThinking">Време за мислене: {this.state.engine.time} милисекунди</label>
+                        <div className="range">
+                            <input type="range" min={100} max={4000} defaultValue={2000} className="form-control" id="timeForThinking"
+                                   onChange={(event) =>
+                                       this.setState({engine: {...this.state.engine, time: event.target.value}})}/>
+                        </div>
+                    </div>
+
+                    <div className="form-group col-md-12 align-self-end">
+                        <button type="button" className="btn btn-outline-light btn-block" onClick={() => this.start()}>Започни игра</button>
                     </div>
                 </div>
             </form>

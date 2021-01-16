@@ -35,6 +35,7 @@ export function logoutUser() {
     return (dispatch) => {
         dispatch(requestLogout());
         localStorage.removeItem('id_token');
+        localStorage.removeItem('gameId');
         dispatch(receiveLogout());
     };
 }
@@ -43,6 +44,19 @@ export function loginUser(email, password) {
     console.log(email);
     return (dispatch) => {
         userService.login(email, password)
+            .then(token => {
+                localStorage.setItem('id_token', token);
+                dispatch(receiveLogin());
+            })
+            .catch(error => {
+                dispatch(loginError(error.message ? error.message : 'Something went wrong. Try again'));
+            })
+    }
+}
+
+export function oauth() {
+    return (dispatch) => {
+        userService.oauth()
             .then(token => {
                 localStorage.setItem('id_token', token);
                 dispatch(receiveLogin());

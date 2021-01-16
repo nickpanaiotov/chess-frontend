@@ -7,21 +7,8 @@ import {
     Nav,
     NavItem,
     NavLink,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
-    Input,
-    UncontrolledAlert,
     Dropdown,
-    Collapse,
     DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    Badge,
-    ButtonGroup,
-    Button,
-    Form,
-    FormGroup,
 } from "reactstrap";
 import {logoutUser} from "../../actions/user";
 import {
@@ -31,19 +18,21 @@ import {
     changeSidebarVisibility,
 } from "../../actions/navigation";
 
-import sender1 from "../../images/1.png";
-import sender2 from "../../images/2.png";
-import sender3 from "../../images/3.png";
-
-import avatar from "../../images/people/a5.jpg";
-
 import s from "./Header.module.scss";
+import {userService} from "../../services/userService";
 
 class Header extends React.Component {
     static propTypes = {
         dispatch: PropTypes.func.isRequired,
         sidebarPosition: PropTypes.string.isRequired,
     };
+
+    componentDidMount() {
+        userService.info().then(user => {
+            console.log("user ", user)
+            this.setState({user: user})
+        });
+    }
 
     constructor(props) {
         super(props);
@@ -65,6 +54,7 @@ class Header extends React.Component {
             searchFocused: false,
             searchOpen: false,
             notificationsOpen: false,
+            user: {username: 'unknown'}
         };
     }
 
@@ -141,9 +131,11 @@ class Header extends React.Component {
                     >
                         <DropdownToggle nav style={{color: "#f4f4f5", padding: 0}}>
                               <span className={`${s.avatar} rounded-circle thumb-sm float-left mr-2`}>
-                                <img src={avatar} alt="..."/>
+                                <img src={this.state.user.attributes &&
+                                this.state.user.attributes.avatar_url
+                                    ? this.state.user.attributes.avatar_url : "/avatar.png"} alt="..."/>
                               </span>
-                            <span className={`small ${s.accountCheck}`}>Jon Snow</span>
+                            <span className={`small ${s.accountCheck}`}>{this.state.user.username}</span>
                         </DropdownToggle>
                     </Dropdown>
                     <NavItem className={`${s.divider} d-none d-sm-block`}/>
