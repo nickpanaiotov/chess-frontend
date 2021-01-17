@@ -10,11 +10,7 @@ class Dashboard extends React.Component {
             orientation: 'white',
             // history: JSON.parse("[{\"whiteMove\":\"f3\",\"blackMove\":\"e5\"},{\"whiteMove\":\"e4\",\"blackMove\":\"Nc6\"},{\"whiteMove\":\"d3\",\"blackMove\":\"h6\"},{\"whiteMove\":\"c4\",\"blackMove\":\"Bb4+\"},{\"whiteMove\":\"Bd2\",\"blackMove\":\"a5\"},{\"whiteMove\":\"Bxb4\",\"blackMove\":\"axb4\"},{\"whiteMove\":\"a3\",\"blackMove\":\"Nd4\"},{\"whiteMove\":\"axb4\",\"blackMove\":\"Rxa1\"},{\"whiteMove\":\"Ne2\",\"blackMove\":\"Qh4+\"},{\"whiteMove\":\"g3\",\"blackMove\":\"Nxf3+\"},{\"whiteMove\":\"Kf2\",\"blackMove\":\"Qf6\"},{\"whiteMove\":\"Nf4\",\"blackMove\":\"Nd4\"},{\"whiteMove\":\"Bh3\",\"blackMove\":\"Ne7\"},{\"whiteMove\":\"Qa4\",\"blackMove\":\"Rxa4\"},{\"whiteMove\":\"Nc3\",\"blackMove\":\"exf4\"},{\"whiteMove\":\"Nxa4\",\"blackMove\":\"fxg3+\"},{\"whiteMove\":\"Kxg3\",\"blackMove\":\"Qf3+\"},{\"whiteMove\":\"Kh4\",\"blackMove\":\"g5#\"}]")
             history: null,
-            engine: {
-                difficulty: 10,
-                depth: 10,
-                time: 2000
-            }
+            engine: this.getDefaultEngineState()
         };
     }
 
@@ -164,9 +160,18 @@ class Dashboard extends React.Component {
     }
 
     leaveGame = () => {
-        this.setState({orientation: 'white', history: null})
+        this.setState({orientation: 'white', history: null, engine: this.getDefaultEngineState()})
         this.leave();
     }
+
+    getDefaultEngineState() {
+        return {
+            difficulty: 10,
+            depth: 10,
+            time: 2000
+        };
+    }
+
 }
 
 export default Dashboard;

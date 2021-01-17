@@ -130,7 +130,7 @@ class Game extends Component<Props> {
 
         this.setState({
             gameId: "",
-            fen: "start",
+            fen: "",
             // square styles for active drop square
             dropSquareStyle: {},
             // custom square styles
